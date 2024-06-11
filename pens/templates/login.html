@@ -1,0 +1,97 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Pen Website</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+h1 {
+    color: #4a5568;
+    text-align: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 370px;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #4a5568;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #718096;
+}
+
+a {
+    color: #4a5568;
+}
+
+a:hover {
+    color: #718096;
+}
+.form-group { 
+    width: 100%; 
+    margin-bottom: 1rem;
+} 
+.alert { 
+    padding: 0.75rem 1.25rem; 
+    margin-bottom: 1rem; 
+    border: 1px solid transparent; 
+    border-radius: 0.25rem; 
+} 
+.alert-danger { 
+    color: #721c24; 
+    background-color: #f8d7da; 
+    border-color: #f5c6cb; 
+} 
+</style>
+</head>
+<body>
+    <a href="{% url 'admin_login' %}"><h1>Login</h1></a>
+    <div class="container">
+    <form  method="POST">
+        {% csrf_token %}
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <span id="usernameError" class="error-message"></span>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <span id="passwordError" class="error-message"></span>
+
+        <button type="submit">Login</button>
+        <p class="text-center">
+            If you don't have an account,
+            <a href="{% url 'register' %}">Register</a> instead.<br><br>
+            Forget password<a href="{% url 'password_reset' %}">Forgot Password?</a>
+
+        </p>
+    </form>
+    </div>
+</body>
+</html>

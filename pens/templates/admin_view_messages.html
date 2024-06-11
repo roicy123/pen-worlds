@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin View Messages</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        strong {
+            color: #4caf50;
+        }
+        .empty-message {
+            font-style: italic;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>Received Messages</h1>
+    <ul>
+        {% for message in received_messages %}
+        <li>
+            <strong>From:</strong> {{ message.sender }}<br>
+            <strong>Subject:</strong> {{ message.subject }}<br>
+            <strong>Body:</strong> {{ message.body }}<br>
+            <strong>Timestamp:</strong> {{ message.timestamp }}
+        </li>
+        {% empty %}
+        <li class="empty-message">No messages.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

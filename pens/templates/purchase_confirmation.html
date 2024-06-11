@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Purchase Confirmation</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bill-container {
+      width: 80%;
+      margin: 50px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    .bill-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .bill-header h2 {
+      font-size: 34px;
+      font-weight: bold;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bill-customer-details {
+      margin-bottom: 20px;
+    }
+
+    .bill-customer-details p {
+      font-size: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bill-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .bill-table th,
+    .bill-table td {
+      border: 1px solid #ccc;
+      padding: 5px;
+    }
+
+    .bill-table tr:nth-child(odd) {
+      background-color: #eee;
+    }
+
+    .bill-table th {
+      text-align: left;
+      font-weight: bold;
+    }
+
+    .bill-total {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .customer-info {
+      margin: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .customer-info p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .customer-info p label {
+      font-weight: bold;
+    }
+    form button[type="submit"] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+
+    }
+
+  form button[type="submit"]:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+  <div class="bill-container">
+    <div class="bill-header">
+      <h2>Purchase Confirmation</h2>
+    </div>
+    <div class="bill-customer-details">
+      <p>Thank you for your purchase, {{ user.checkoutinfo.first_name }} {{ user.checkoutinfo.last_name }}!</p>
+    </div>
+    <div class="customer-info">
+      <p>
+        <label>First Name:</label> {{ user.checkoutinfo.first_name }}
+      </p>
+      <p>
+        <label>Last Name:</label> {{ user.checkoutinfo.last_name }}
+      </p>
+      <p>
+        <label>Address:</label> {{ user.checkoutinfo.shipping_address }}
+      </p>
+      <p>
+        <label>Contact Information:</label>{{ user.checkoutinfo.contact_info }}
+      </p>
+    </div>
+    <table class="bill-table">
+      <tr>
+        <th>Product</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+      {% for item in cart_items %}
+      {% load math_filters %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>&#8377;{{ item.product.price}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <p class="bill-total">Total Price: &#8377; {{ total_price }}</p>
+    <form method="post" action="{% url 'confirm_purchase' %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+    </form>
+  </div>
+</body>
+</html>

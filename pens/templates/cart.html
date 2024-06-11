@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .card-title {
+            margin-bottom: 10px;
+        }
+        .card-img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+        .btn {
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 14px;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+        .btn-success {
+            background-color: #4CAF50;
+        }
+        .btn-danger {
+            background-color: #f44336;
+        }
+        a.btn.btn-primary {
+            background-color: #368ff4;
+            margin-left: 10px;
+
+        }
+        a.btn.btn-primary {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.btn.btn-primary:hover {
+            background-color: #ccc;
+        }
+
+        a.btn.btn-primary:active {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h2>Your Cart</h2>
+    {% for item in cart_items %}
+    <div class="card">
+        <div class="card-title">{{ item.product.name }}</div>
+        <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="card-img">
+        <div>Price: &#8377;{{ item.product.price }}</div>
+        <div>Quantity: {{ item.quantity }}</div>
+        <div style="display: flex; align-items: center;">
+            <form method="post" action="{% url 'add_to_cart' item.product.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success">+</button>
+            </form>
+            <form method="post" action="{% url 'remove_from_cart' item.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">-</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+    <p>Total Price: {{ total_price }}</p>
+    <a href="{% url 'checkout' %}" class="btn btn-primary">Proceed to Checkout</a>
+    <a href="{% url 'product_list' %}" class="btn btn-primary">Continue Shopping</a>
+</body>
+</html>

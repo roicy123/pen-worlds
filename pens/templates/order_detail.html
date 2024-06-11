@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Detail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl7/1L_dstPt3HV5HzF6Gvk/e3s4Wz6iJgD/+ub2oU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .gradient-custom {
+            background: linear-gradient(45deg, #e6e6e6, #f4f4f4);
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header, .card-footer {
+            background-color: #a8729a;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+        }
+
+        .card-header h5 span {
+            color: #f4f4f4;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .lead {
+            font-weight: 600;
+        }
+
+        .card-body p {
+            margin: 0;
+        }
+
+        .fw-bold {
+            font-weight: 700;
+        }
+
+        .text-muted {
+            color: #6c757d !important;
+        }
+
+        .mb-0 {
+            margin-bottom: 0 !important;
+        }
+
+        .mb-4 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .d-flex {
+            display: flex !important;
+        }
+
+        .justify-content-center {
+            justify-content: center !important;
+        }
+
+        .justify-content-between {
+            justify-content: space-between !important;
+        }
+
+        .align-items-center {
+            align-items: center !important;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .progress {
+            height: 6px;
+            border-radius: 16px;
+        }
+
+        .progress-bar {
+            border-radius: 16px;
+            background-color: #a8729a;
+        }
+
+        .btn-danger:hover {
+            background-color: #e04040;
+            border-color: #e04040;
+        }
+
+        .btn-danger i {
+            color: #fff;
+            margin-right: 5px;
+        }
+
+        .btn-sm {
+            padding: 5px 15px;
+            font-size: 14px;
+        }
+        .back-btn {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .text-center {
+            text-align: center; /* Center align the content */
+            margin-bottom: 20px; /* Add some bottom margin for spacing */
+        }
+
+    </style>
+</head>
+<body>
+    <section class="h-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-10 col-xl-8">
+              <div class="card" style="border-radius: 10px;">
+                <div class="card-header px-4 py-5">
+                  <h5 class="text-muted mb-0">Thanks for your Order, <span style="color: #f4f4f4;">{{ order.user.username }}</span>!</h5>
+                </div>
+                <div class="card-body p-4">
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
+                    <p class="small text-muted mb-0">Receipt Voucher : {{ order.id }}</p>
+                  </div>
+                  {% for item in order.orderitem_set.all %}
+                  <div class="card shadow-0 border mb-4">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-2">
+                          <img src="{{ item.product.image.url }}" class="img-fluid" alt="{{ item.product.name }}">
+                        </div>
+                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                          <p class="text-muted mb-0">{{ item.product.name }}</p>
+                        </div>
+                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                          <p class="text-muted mb-0 small">{{ item.product.color }}</p>
+                        </div>
+                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                          <p class="text-muted mb-0 small">Qty: {{ item.quantity }}</p>
+                        </div>
+                        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                          <p class="text-muted mb-0 small">&#8377; {{ item.price }}</p>
+                        </div>
+                      </div>
+                      <hr class="mb-4" style="background-color: #e0e0e0; opacity: 1;">
+                      <div class="row d-flex align-items-center">
+                        <div class="col-md-2">
+                          <p class="text-muted mb-0 small">Track Order</p>
+                        </div>
+                        <div class="col-md-10">
+                          <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{ progress_percentage }}%;" aria-valuenow="{{ progress_percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                          <div class="d-flex justify-content-around mb-1">
+                            <p class="text-muted mt-1 mb-0 small">Pending</p>
+                            <p class="text-muted mt-1 mb-0 small">Processing</p>
+                            <p class="text-muted mt-1 mb-0 small">Shipped</p>
+                            <p class="text-muted mt-1 mb-0 small">Delivered</p>
+                            <p class="text-muted mt-1 mb-0 small">Cancelled</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  <div class="d-flex justify-content-between pt-2">
+                    <p class="fw-bold mb-0">Order Details</p>
+                    <p class="text-muted mb-0"><span class="fw-bold me-4">Total</span> &#8377; {{ order.total_price }}</p>
+                  </div>
+                  <div class="d-flex justify-content-between pt-2">
+                    <p class="text-muted mb-0">Invoice Number : {{ order.id }}</p>
+                    <p class="text-muted mb-0"><span class="fw-bold me-4">Discount</span> &#8377; {{ order.discount }}</p>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <p class="text-muted mb-0">Invoice Date : {{ order.date_ordered }}</p>
+                    <p class="text-muted mb-0"><span class="fw-bold me-4">GST 18%</span> {{ order.gst }}</p>
+                  </div>
+                  <div class="d-flex justify-content-between mb-5">
+                    <p class="text-muted mb-0">Receipts Voucher : {{ order.id }}</p>
+                    <p class="text-muted mb-0"><span class="fw-bold me-4">Delivery Charges</span> Free</p>
+                  </div>
+                </div>
+                <div class="card-footer border-0 px-4 py-5">
+                  <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total paid: <span class="h2 mb-0 ms-2">&#8377; {{ order.total_price }}</span></h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    <div class="text-center">
+    <h4><a style="text-decoration:none;" href="{% url 'download-invoice' order.id   %}" ><button class="btn btn-danger btn-sm"><i class="fas fa-download"></i> Download Invoice</button></a></h4></div>
+    <a href="{% url 'order_history' %}" class="back-btn">Back to Order History</a>
+</body>
+</html>

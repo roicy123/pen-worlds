@@ -1,0 +1,253 @@
+<!-- product_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products | Pen Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .site-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+            color: #fff;
+        }
+
+        .nav-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #fcf9f9;
+            margin-bottom: 0;
+            text-align: center;
+            background-color: #333;
+            padding-top: 100px;
+            padding-bottom: 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px;
+        }
+
+        .navbar a {
+            color: #f4f4f4;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .navbar a:hover {
+            color: rgb(70, 153, 192);
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .product-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px;
+        }
+
+        .product {
+        margin: 10px;
+        width: calc(25% - 20px);
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product-info {
+            padding: 10px;
+        }
+
+        .product-info h3 {
+            font-size: 20px;
+            margin-bottom: 0;
+        }
+
+        .product-info p.price {
+            font-size: 16px;
+            margin-top: 0;
+            font-weight: bold;
+        }
+
+        .buy-now-button {
+            display: inline-block;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .buy-now-button:hover {
+            background-color: #0056b3;
+        }
+        .navbar {
+            background-color: #333 !important;
+        }
+        .navbar-nav.ms-auto .nav-link {
+        text-decoration: none;
+    }
+
+    .navbar-nav.ms-auto .nav-link:hover {
+        text-decoration: none;
+    }
+
+        .nav-item .dropdown-toggle {
+            text-decoration: none !important;
+        }
+        .carousel-inner img {
+    height: 500px;
+    object-fit: cover;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Pen World</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto"> <!-- Use ms-auto to push items to the right -->
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'first' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'supplier_login' %}">Supplier Login</a>
+                    </li>
+                </ul>
+                <form class="d-flex" method="GET" action="{% url 'first' %}">
+                    <input class="form-control me-2" type="text" name="search" placeholder="Search for products.." aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+    <h1>Pen World</h1>
+    <div class="navbar">
+        <a href="{% url 'first' %}">All</a>
+        <a href="{% url 'first' %}?category=1">Fountain Pens</a>
+        <a href="{% url 'first' %}?category=2">Nibs</a>
+        <a href="{% url 'first' %}?category=3">Accessories</a>
+    </div>
+    <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{% static 'images/h1.jpg' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5 style="color: #333;">Fountain Pen</h5>
+              <p style="color: #333;">Welcome to the exciting world of pens.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/h4.jpg' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5 style="color: #333;">Nibs</h5>
+              <p style="color: #333;">Welcome to the exciting world of fountain pen nibs.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="{% static 'images/h3.jpg' %}" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5 style="color: #333;">Other Accessories</h5>
+              <p style="color: #333;">Welcome to the exciting world of pen accessories.</p>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    <div class="product-list">
+        {% for product in products %}
+            <div class="product">
+                <a href="{% url 'login' %}" style="text-decoration: none; color: black;">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="display: block; margin: 0 auto;">
+                    <div class="product-info">
+                        <p>{{ product.name }}</p>
+                        <p class="price">Price: &#8377;{{ product.price }} INR</p>
+                        <p class="free">Free Delivery</p>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    {% include 'footer.html' %}
+</body>
+</html>

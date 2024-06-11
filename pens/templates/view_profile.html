@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        img.profile-picture {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto;
+            display: block;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        a.edit-profile-link {
+            display: block;
+            width: 150px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        a.edit-profile-link:hover {
+            background-color: #0056b3;
+        }
+        a.home-link {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        a.home-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>My Profile</h2>
+    <a class="home-link" href="{% url 'product_list' %}">Home</a>
+    {% if user_profile.profile_pic %}
+        <img src="{{ user_profile.profile_pic.url }}" alt="Profile Picture" class="profile-picture">
+    {% else %}
+        <p>No profile picture uploaded.</p>
+    {% endif %}
+    <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
+    <p><strong>Address:</strong> {{ user_profile.address }}</p>
+    <p><strong>Mobile:</strong> {{ user_profile.mobile }}</p>
+    <a href="{% url 'edit_profile' %}" class="edit-profile-link">Edit Profile</a>
+</div>
+</body>
+</html>
+``

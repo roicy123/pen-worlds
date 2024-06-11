@@ -1,0 +1,249 @@
+<!-- product_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }} | Pen Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .site-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 10px;
+            color: #fff;
+        }
+
+        .nav-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-item {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            color: #fcf9f9;
+            margin-bottom: 0;
+            text-align: center;
+            background-color: #333;
+            padding-top: 100px;
+            padding-bottom: 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 10px;
+        }
+
+        .navbar a {
+            color: #f4f4f4;
+            text-decoration: none;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .navbar a:hover {
+            color: rgb(70, 153, 192);
+        }
+
+        .product-detail {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-detail img {
+            max-width: 100%;
+            height: auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .product-info {
+            margin-top: 20px;
+        }
+
+        .product-info h2 {
+            color: #333;
+        }
+
+        .product-info p {
+            color: #555;
+        }
+
+        .product-info .price {
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: 1px solid #383838;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+        .add-to-cart:hover {
+            background-color: #0056b3;
+            
+        }
+        .navbar {
+            background-color: #333 !important;
+        }
+        .actions {
+    margin-top: 10px;      
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.actions a {
+    text-decoration: none;
+    color: #000;
+}
+
+.actions a:hover {
+    color: #333;
+}
+
+.add-review {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.add-review:hover {
+    background-color: #3F8F33;
+}
+
+.view-reviews {
+    background-color: #007BFF;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
+.view-reviews:hover {
+    background-color: #0056B3;
+}
+.navbar-nav.ms-auto .nav-link {
+        text-decoration: none;
+    }
+
+    .navbar-nav.ms-auto .nav-link:hover {
+        text-decoration: none;
+    }
+    .product-info .availability {
+        font-weight: bold;
+        margin-top: 10px;
+    }
+
+    .product-info .availability.out-of-stock {
+        color: red;
+    }
+
+    .product-info .availability.low-stock {
+        color: orange;
+    }
+
+    .product-info .availability.in-stock {
+        color: green;
+    }
+    
+</style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Pen World</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto"> <!-- Use ms-auto to push items to the right -->
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'product_list' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'view_cart' %}">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+    <h1>Pen World</h1>
+    <div class="navbar">
+        <a href="{% url 'product_list' %}">All</a>
+        <a href="{% url 'product_list' %}?category=1">Fountain Pens</a>
+        <a href="{% url 'product_list' %}?category=2">Nibs</a>
+        <a href="{% url 'product_list' %}?category=3">Accessories</a>
+    </div>
+    <div class="product-detail">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        <div class="product-info">
+            <h2>{{ product.name }}</h2>
+            <p><b>Description:</b> {{ product.description }}</p>
+            <p class="price">Price: &#8377;{{ product.price }} INR</p>
+            <p><b>Category:</b> {{ product.category }}</p>
+            <p><b>Manufacture:</b> {{ product.manufacture }}</p>
+            <p class="availability {% if product.quantity == 0 %}out-of-stock{% elif product.quantity < 10 %}low-stock{% else %}in-stock{% endif %}">   
+                <b style="color:#555; font-size: 15px;">Availability:</b>
+                {% if product.quantity == 0 %}
+                    Out of Stock
+                {% elif product.quantity < 10 %}
+                    Low Stock
+                {% else %}
+                    In Stock
+                {% endif %}
+            </p>
+            <p><b>Colour:</b> {{ product.colour }}</p>
+            <a class="add-to-cart" href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
+            <div class="actions">
+              <a href="{% url 'add_review' product.id %}" class="add-review">Add a review</a>
+              <a href="{% url 'product_reviews' product.id %}" class="view-reviews">View Reviews</a>
+            </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

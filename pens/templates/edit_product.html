@@ -1,0 +1,116 @@
+<!-- edit_product.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Product | Pen Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        form {
+            width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: calc(100% - 22px); /* Adjusted width to accommodate borders */
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        textarea:focus {
+            border-color: #5e9ad6;
+        }
+
+        textarea {
+            height: 100px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1e1e1e;
+        }
+
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .alert-danger {
+            color: #721c24;
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+<h2>Edit Product</h2>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="id_name">Name:</label>
+    {{ form.name }}
+    <label for="id_description">Description:</label>
+    {{ form.description }}
+    <label for="id_price">Price:</label>
+    {{ form.price }}
+    <label for="id_category">Category:</label>
+    {{ form.category }}
+    <label for="id_manufacture">Manufacture:</label>
+    {{ form.manufacture }}
+    <label for="id_quantity">Quantity:</label>
+    {{ form.quantity }}
+    <label for="id_image">Image:</label>
+    {{ form.image }}
+    <label for="id_colour">Colour:</label>
+    {{ form.colour }}
+    <label for="quantity_increment">Quantity Increment:</label>
+    <input type="number" id="quantity_increment" name="quantity_increment" min="0" value="0">
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>

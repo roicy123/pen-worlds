@@ -1,0 +1,193 @@
+<!-- home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Pen Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        h2.admin-title {
+            color: #fffefe;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #333;
+            padding: 20px;
+        }
+
+        h3.section-title {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        ul.product-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li.product-lists {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .product-name {
+            margin-bottom: 10px;
+        }
+
+        .product-description,
+        .product-price {
+            margin-bottom: 15px;
+        }
+
+        .image {
+            width: 200px;
+            height: auto;
+        }
+
+        .link {
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .add-pen-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .edit-link {
+            background-color: #00ff3c;
+            color: #fff;
+        }
+
+        .delete-link {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .edit-link:hover,
+        .delete-link:hover {
+            opacity: 0.8;
+        }
+
+        .nav-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #333;
+            color: #ddd;
+            padding: 10px;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-items a {
+            margin: 0 10px;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-form input[type="text"] {
+            margin-right: 10px;
+        }
+
+        .no-products {
+            color: #333;
+        }
+
+        .product-details {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .product-details b {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <ul class="nav-list">
+        <li class="nav-items">
+            <a href="{% url 'add_product' %}" style="color: #ddd;">Add Pen |</a>
+            <a href="{% url 'add_category' %}" style="color: #ddd;">Add Category|</a>
+            <a href="{% url 'manage_orders' %}" style="color: #ddd;">Orders|</a>
+            <a href="{% url 'add_supplier' %}" style="color: #ddd;">Add Supplier|</a>
+            <a href="{% url 'view_suppliers' %}" style="color: #ddd;">View Supplier|</a>
+            <a href="{% url 'check_stock' %}" style="color: #ddd;">Check Stock|</a>
+            <a href="{% url 'admin_send_message' %}" style="color: #ddd;">Send Message|</a>
+            <a href="{% url 'admin_view_messages' %}" style="color: #ddd;">View Messages|</a>
+            <a href="{% url 'admin_view_refill_requests' %}" style="color: #ddd;">View Request|</a>
+            <a href="{% url 'admin_audit_report' %}" style="color: #ddd;">Report|</a>
+            <a href="{% url 'logout' %}" style="color: #ddd;">Log Out |</a>
+
+        </li>
+        <form class="search-form" action="{% url 'search_products' %}" method="get">
+            <input type="text" name="query" placeholder="Search Products...">
+            <input type="submit" value="Search">
+        </form>
+    </ul>
+    <h2 class="admin-title">Admin Panel</h2>
+    <h3 class="section-title">Pen Products</h3>
+    <ul class="product-list">
+        {% for product in products %}
+        <li class="product-lists">
+            <div class="product-details">
+                <strong class="product-name">{{ product.name }}</strong>
+                <p class="product-description">Description: {{ product.description }}</p>
+                <p class="product-price">Price: &#8377;{{ product.price }} INR</p>
+                <p class="product-details">Category: {{ product.category }}</p>
+                <p class="product-details">Manufacture: {{ product.manufacture }}</p>
+                <p class="product-quantity">Avaliablity: {{ product.quantity }}</p>
+                <p class="product-details">Colour: {{ product.colour }}</p>
+                <p class="product-image"> <img src="{{ product.image.url }}" alt="{{ product.name }}" class="image"></p>
+                <a href="{% url 'edit_product' product.id %}" class="link edit-link">Edit</a>
+                <a href="{% url 'delete_product' product.id %}" class="link delete-link">Delete</a>
+                <a href="{% url 'admin_send_refill_request' product.id %}" class="link delete-link">Request</a>
+            </div>
+        </li>
+        {% empty %}
+        <p class="no-products">No pen products available.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>

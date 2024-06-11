@@ -1,0 +1,88 @@
+<!-- add_product.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Product | Pen Website</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    color: #333;
+}
+
+form {
+    width: 80%;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
+}
+
+input[type="text"], textarea, input[type="number"], input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, textarea:focus, input[type="number"]:focus, input[type="file"]:focus {
+    border-color: #333;
+}
+
+button[type="submit"] {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 20px;
+}
+
+button[type="submit"]:hover {
+    background-color: #555;
+}
+a {
+    position:absolute;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+a :hover {
+    background-color: #555;
+}
+</style>
+</head>
+<body>
+    <h1>Add Product</h1>
+    <form action="/add-product/" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Add Product</button>
+        <a href="{% url 'home' %}" style="color: #ddd;">Home </a>
+    </form>
+</body>
+</html>

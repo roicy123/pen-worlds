@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audit Report</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .back-home, .download-pdf {
+            background-color: #353f9d;
+            color: #fff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+        .back-home:hover, .download-pdf:hover {
+            background-color: #2b338f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Audit Report</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Supplier</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Status</th>
+          <th>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for refill_request in refill_requests %}
+          <tr>
+            <td>{{ refill_request.product }}</td>
+            <td>{{ refill_request.supplier }}</td>
+            <td>{{ refill_request.quantity }}</td>
+            <td>{% if refill_request.price %}{{ refill_request.price }}{% else %}N/A{% endif %}</td>
+            <td>{{ refill_request.get_status_display }}</td>
+            <td>{{ refill_request.timestamp }}</td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="6">No transactions found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <a href="{% url 'home' %}" class="back-home">Back to Home</a>
+    <a href="{% url 'download_audit_report' %}" class="download-pdf">Download PDF</a>
+</body>
+</html>

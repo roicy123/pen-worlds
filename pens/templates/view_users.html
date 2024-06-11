@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | User Management</title>
+    <!-- Add any additional styling if needed -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">User Management</h1>
+        <ul class="list-group mt-3">
+            {% for user in users %}
+                <li class="list-group-item">{{ user.username }} - {{ user.email }}</li>
+            {% endfor %}
+        </ul>
+        <!-- Add any additional content or features as needed -->
+    </div>
+</body>
+</html>
